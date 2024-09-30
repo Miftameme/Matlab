@@ -1,0 +1,23 @@
+% Signal information
+bit_rate = 16; % bits per second
+signal = [1 1 0 0 0 1 1 0 1 0 1 1 0 0 0 1 0 1]; % Binary signal
+levels = 4; % Number of levels
+
+% Time per bit (bit interval)
+bit_interval = 1 / bit_rate;
+
+% Generate time axis for the entire signal
+time = 0:bit_interval:(length(signal) * bit_interval - bit_interval);
+
+% Normalize signal to 4 levels (you can modify this according to your levels)
+mapped_signal = (signal - min(signal)) / (max(signal) - min(signal)) * (levels - 1);
+
+% Plotting the digital signal
+figure;
+stairs(time, mapped_signal, 'LineWidth', 2); % Stair-step plot for digital signal
+title('4-Level Digital Signal Spectrum');
+xlabel('Time (s)');
+ylabel('Amplitude (Levels)');
+grid on;
+xlim([0 max(time)]);
+ylim([-0.5 levels - 0.5]);
